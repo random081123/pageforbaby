@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Will You Be My Valentine?</title>
+
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Times New Roman", cursive;
+  background: #e9c9cf;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  text-align: center;
+}
+
+/* Floating background emojis */
+.floating {
+  position: absolute;
+  font-size: 25px;
+  opacity: 0.5;
+  animation: float linear infinite;
+}
+
+@keyframes float {
+  from { transform: translateY(100vh); }
+  to { transform: translateY(-10vh); }
+}
+
+/* Meme Image */
+.meme-box {
+  margin-top: 80px;
+}
+
+.meme-box img {
+  width: 250px;
+  border-radius: 11px;
+  border: 5px solid black;
+  box-shadow: 5px 5px 0px black;
+}
+
+.caption {
+  font-size: 22px;
+  margin-top: 10px;
+}
+
+/* Main Card */
+.card {
+  background: #eee;
+  width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 20px;
+  border: 6px solid black;
+  box-shadow: 8px 8px 0px black;
+}
+
+h1 {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+button {
+  font-size: 22px;
+  font-family: "Times New Roman", cursive;
+  padding: 12px 30px;
+  margin: 10px;
+  border-radius: 12px;
+  border: 4px solid black;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#yesBtn {
+  background: #18c964;
+}
+
+#noBtn {
+  background: #ff4040;
+  position: absolute;
+}
+</style>
+</head>
+<body>
+
+<div class="meme-box" id="memeSection">
+  <img id="memeImg" src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif">
+  <div class="caption" id="caption">please dont say no</div>
+</div>
+
+<div class="card">
+  <h1>Will you be My Valentine?</h1>
+  <button id="yesBtn">Yes</button>
+  <button id="noBtn">No</button>
+  <div>try clicking "no"...  if you can hihi</div>
+</div>
+
+<script>
+let attempts = 0;
+let yesSize = 1;
+
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const attemptsText = document.getElementById("attempts");
+const memeImg = document.getElementById("memeImg");
+const caption = document.getElementById("caption");
+
+/* Meme phrases & images */
+const memes = [
+  {
+    img: "https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif",
+    text: "Why no?"
+  },
+  {
+    img: "https://media.giphy.com/media/l378giAZgxPw3eO52/giphy.gif",
+    text: "Are you sure about that?"
+  },
+  {
+    img: "https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif",
+    text: "Think again 😢"
+  },
+  {
+    img: "https://media.giphy.com/media/l4FGuhL4U2WyjdkaY/giphy.gif",
+    text: "This is getting awkward..."
+  },
+  {
+    img: "https://media.giphy.com/media/3oriO6qJiXajN0TyDu/giphy.gif",
+    text: "Sorry but you don't have a choice now"
+  }
+];
+
+/* Move NO randomly */
+function moveNoFarAway() {
+  const btnWidth = noBtn.offsetWidth;
+  const btnHeight = noBtn.offsetHeight;
+
+  const maxX = window.innerWidth - btnWidth;
+  const maxY = window.innerHeight - btnHeight;
+
+  const randomX = Math.random() * maxX;
+  const randomY = Math.random() * maxY;
+
+  noBtn.style.left = randomX + "px";
+  noBtn.style.top = randomY + "px";
+}
+
+
+// Make NO button run away before you can click it
+noBtn.addEventListener("mouseover", moveNoFarAway);
+noBtn.addEventListener("mousedown", moveNoFarAway);
+;
+
+/* YES clicked */
+yesBtn.addEventListener("click", () => {
+
+  document.body.innerHTML = `
+      <h1 style="font-size:60px;">YAAAAAAAAAAAAAAYYYYY</h1>
+      <img src="picture.jpg" width="400">
+    </div>
+    
+    <div class="final-card">
+      <h1>thank you for being my date this valentine's day, my love</h1>
+      <p style="font-size:20px;">
+        thank you for choosing me despite all. i'm so grateful i have you by my side.<br>
+        every moment with you is a treasure i will always hold close to my heart.<br>
+        i'm very excited to go where we planned to celebrate.<br>
+        may our hearts be filled with the love with have for each other.<br>
+        Thank you for being my Valentine today and always! 
+      </p>
+    </div>
+  `;
+});
+
+/* Floating emojis */
+function createFloating() {
+  const emojis = ["💖","💕","😂","🐱","💘"];
+  const el = document.createElement("div");
+  el.className = "floating";
+  el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+  el.style.left = Math.random() * 100 + "vw";
+  el.style.animationDuration = (5 + Math.random() * 5) + "s";
+  document.body.appendChild(el);
+
+  setTimeout(() => el.remove(), 10000);
+}
+setInterval(createFloating, 250);
+</script>
+
+</body>
+</html>
